@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>apsentry — wireless threat monitor</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">apsentry</span>
+      <span class="tag">Evil Twin / Rogue AP detection</span>
+    </div>
+    <div class="controls">
+      <span id="status-dot" class="dot"></span>
+      <span id="status-text" class="muted">connecting…</span>
+      <button id="btn-scan" class="btn">Rescan now</button>
+      <button id="btn-learn" class="btn btn-ghost">Trust current as baseline</button>
+      <button id="btn-clear" class="btn btn-ghost">Clear baseline</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid stats">
+      <div class="card risk" id="risk-card">
+        <div class="risk-score" id="risk-score">0</div>
+        <div class="risk-meta">
+          <div class="risk-label" id="risk-label">clear</div>
+          <div class="muted small">environment risk</div>
+          <div class="risk-bar"><span id="risk-fill"></span></div>
+        </div>
+      </div>
+      <div class="card stat"><div class="num" id="stat-aps">0</div><div class="muted">access points</div></div>
+      <div class="card stat"><div class="num" id="stat-threats">0</div><div class="muted">active threats</div></div>
+      <div class="card stat"><div class="num" id="stat-scans">0</div><div class="muted">scans</div></div>
+      <div class="card sev-breakdown" id="sev-breakdown"></div>
+    </section>
+
+    <section class="grid main-cols">
+      <div class="card panel">
+        <div class="panel-head">
+          <h2>Threat alerts</h2>
+          <div class="filters" id="sev-filters"></div>
+        </div>
+        <div id="alerts" class="alerts"></div>
+      </div>
+
+      <div class="card panel">
+        <div class="panel-head"><h2>Channel activity</h2></div>
+        <div id="channels" class="channels"></div>
+      </div>
+    </section>
+
+    <section class="card panel">
+      <div class="panel-head">
+        <h2>Access point inventory</h2>
+        <input id="ap-search" class="search" placeholder="filter by SSID, BSSID, vendor…" />
+      </div>
+      <div class="table-wrap">
+        <table class="ap-table">
+          <thead>
+            <tr>
+              <th>SSID</th><th>BSSID</th><th>Vendor</th><th>Security</th>
+              <th>Band</th><th>Ch</th><th>Signal</th><th>Trust</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="ap-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot muted small">
+    apsentry — authorized monitoring only. Data source:
+    <span id="source">-</span> · last scan <span id="last-scan">-</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
